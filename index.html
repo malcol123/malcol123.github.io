@@ -126,6 +126,17 @@
       color: var(--muted);
     }
 
+    .profile-card {
+      width: 210px; 
+    }
+
+    .profile-email {
+      font-size: 12px;
+      margin-top: 8px;
+      overflow-wrap: anywhere;
+      text-align: center;
+    }
+
     .portrait {
       aspect-ratio: 4 / 5;
       background: var(--soft);
@@ -363,22 +374,28 @@
           <a href="https://orcid.org/0000-0001-6498-9231" target="_blank" rel="noopener noreferrer">Dr. Patricia Capsi-Morales</a>.
         </p>
 
+      </div>
+
+      <div class="profile-card">
+        <div class="portrait">
+          <img src="photo.jpg" alt="Portrait of Martina Columbaro"
+               onerror="this.hidden=true; this.nextElementSibling.hidden=false">
+        </div>
+
         <div class="profile-links" aria-label="Profile links">
-          <a href="mailto:martina.columbaro@iit.it">Email</a>
-          <span class="separator">/</span>
           <a href="https://scholar.google.com/citations?hl=it&user=oFgJXDjRlmwC">Google Scholar</a>
           <span class="separator">/</span>
           <a href="https://www.linkedin.com/in/martinacolumbaro/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <span class="separator">/</span>
           <a href="cv.pdf" target="_blank">CV</a>
         </div>
-      </div>
 
-      <div class="portrait">
-        <img src="photo.jpg" alt="Portrait of Martina Columbaro"
-             onerror="this.hidden=true; this.nextElementSibling.hidden=false">
+        <div class="profile-email">
+          Email: <a href="mailto:martina.columbaro@iit.it">martina.columbaro@iit.it</a>
+        </div>
       </div>
     </section>
+        
 
     <section id="research" class="section">
       <h2>Research</h2>
