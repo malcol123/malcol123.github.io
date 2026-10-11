@@ -412,6 +412,16 @@
       text-align: center;
     }
 
+    .publication-media {
+      aspect-ratio: 4 / 3;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      display: block;
+      height: auto;
+      object-fit: cover;
+      width: 100%;
+    }
+
     .publication-title {
       color: var(--link);
       font-size: 15px;
@@ -661,6 +671,10 @@
         max-width: 190px;
       }
 
+      .publication-media {
+        max-width: 190px;
+      }
+
       .education-item {
         gap: 5px;
         grid-template-columns: 1fr;
@@ -827,7 +841,11 @@
       </article>
 
       <article class="publication">
-        <div class="publication-visual">TACTILE<br>SENSING</div>
+        <video class="publication-media" autoplay muted loop playsinline preload="auto"
+               aria-label="Tactile sensing experiment for grasp safety in upper-limb prostheses">
+          <source src="tactile_sensing.mp4" type="video/mp4">
+          Your browser does not support embedded videos.
+        </video>
         <div>
           <div class="publication-title">
             <a href="https://doi.org/10.1007/978-3-031-77588-8_65" target="_blank" rel="noopener noreferrer">
