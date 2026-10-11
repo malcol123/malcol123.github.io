@@ -10,16 +10,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
 
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("martina-theme");
+        if (["white", "black", "marti"].includes(savedTheme)) {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch (error) {
+        /* The page still works if browser storage is unavailable. */
+      }
+    })();
+  </script>
+
   <style>
     :root {
       --background: #ffffff;
+      --page-background: #ffffff;
       --text: #292d32;
       --muted: #626a72;
       --link: #2468a6;
       --highlight: #b42318;
       --line: #e3e7ea;
       --soft: #f4f6f7;
+      --header-background: rgba(255, 255, 255, 0.96);
       --content-width: 980px;
+    }
+
+    html[data-theme="black"] {
+      --background: #17191c;
+      --page-background: #17191c;
+      --text: #edf0f2;
+      --muted: #aeb5bc;
+      --link: #79b8ee;
+      --highlight: #ff8b80;
+      --line: #353a40;
+      --soft: #23272b;
+      --header-background: rgba(23, 25, 28, 0.96);
+      color-scheme: dark;
+    }
+
+    html[data-theme="marti"] {
+      --background: #fffdf5;
+      --page-background:
+        radial-gradient(circle at 9% 13%, rgba(174, 220, 241, 0.52), transparent 27%),
+        radial-gradient(circle at 91% 35%, rgba(250, 225, 119, 0.44), transparent 25%),
+        radial-gradient(circle at 17% 78%, rgba(177, 216, 180, 0.48), transparent 28%),
+        radial-gradient(circle at 84% 88%, rgba(202, 188, 224, 0.25), transparent 20%),
+        #fffdf5;
+      --text: #38444a;
+      --muted: #65716b;
+      --link: #287487;
+      --highlight: #82699f;
+      --line: #d5e5dc;
+      --soft: #f1f8ed;
+      --header-background: rgba(255, 253, 245, 0.92);
     }
 
     * {
@@ -31,11 +76,14 @@
     }
 
     body {
-      background: var(--background);
+      background: var(--page-background);
       color: var(--text);
       font-family: Inter, Arial, Helvetica, sans-serif;
       line-height: 1.65;
       margin: 0;
+      min-height: 100vh;
+      position: relative;
+      transition: background-color 180ms ease, color 180ms ease;
     }
 
     a {
@@ -60,7 +108,7 @@
     }
 
     .site-header {
-      background: rgba(255, 255, 255, 0.96);
+      background: var(--header-background);
       position: sticky;
       top: 0;
       z-index: 10;
@@ -74,11 +122,46 @@
       min-height: 64px;
     }
 
-    .site-name {
-      color: var(--text);
-      font-size: 18px;
-      font-weight: 600;
+    .theme-switcher {
+      align-items: center;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      display: flex;
+      gap: 3px;
+      padding: 3px;
       white-space: nowrap;
+    }
+
+    .theme-button {
+      appearance: none;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1;
+      padding: 8px 10px;
+    }
+
+    .theme-button:hover,
+    .theme-button:focus-visible {
+      color: var(--text);
+    }
+
+    .theme-button:focus-visible {
+      outline: 2px solid var(--link);
+      outline-offset: 2px;
+    }
+
+    .theme-button[aria-pressed="true"] {
+      background: var(--background);
+      border-color: var(--line);
+      box-shadow: 0 1px 4px rgba(25, 30, 35, 0.09);
+      color: var(--text);
     }
 
     .nav-links {
@@ -118,6 +201,17 @@
       margin: 0 0 22px;
     }
 
+    html[data-theme="marti"] h1,
+    html[data-theme="marti"] .section h2 {
+      color: #486f76;
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0.01em;
+    }
+
+    html[data-theme="marti"] h1 {
+      text-shadow: 0 2px 18px rgba(113, 169, 184, 0.2);
+    }
+
     .bio p {
       font-size: 15px;
       margin: 0 0 16px;
@@ -155,6 +249,41 @@
       position: relative;
     }
 
+    html[data-theme="marti"] .portrait {
+      border: 2px solid #9fd1df;
+      border-radius: 22px 8px 22px 8px;
+      box-shadow:
+        0 10px 28px rgba(77, 128, 117, 0.14),
+        0 0 0 6px rgba(249, 222, 115, 0.2);
+    }
+
+    html[data-theme="marti"] .profile-card {
+      position: relative;
+    }
+
+    html[data-theme="marti"] .profile-card::before,
+    html[data-theme="marti"] .profile-card::after {
+      animation: fairy-twinkle 2.6s ease-in-out infinite;
+      color: #e0bd3e;
+      content: "✦";
+      position: absolute;
+      z-index: 2;
+    }
+
+    html[data-theme="marti"] .profile-card::before {
+      font-size: 17px;
+      right: -10px;
+      top: -13px;
+    }
+
+    html[data-theme="marti"] .profile-card::after {
+      animation-delay: -1.3s;
+      bottom: 65px;
+      color: #799f80;
+      font-size: 12px;
+      left: -8px;
+    }
+
     .portrait img {
       height: 100%;
       object-fit: cover;
@@ -175,6 +304,7 @@
 
     .section {
       padding: 28px 0 12px;
+      position: relative;
       scroll-margin-top: 75px;
     }
 
@@ -188,6 +318,20 @@
       line-height: 1.3;
       margin: 0 0 20px;
       padding-bottom: 8px;
+    }
+
+    html[data-theme="marti"] .section h2 {
+      border-bottom-color: #bddbd4;
+    }
+
+    html[data-theme="marti"] .section:not(#publications)::after {
+      color: #78a88a;
+      content: "✦  ·  ❀  ·  ✦";
+      display: block;
+      font-size: 11px;
+      letter-spacing: 5px;
+      margin: 27px auto 0;
+      text-align: center;
     }
 
     .section p,
@@ -301,6 +445,170 @@
       text-align: center;
     }
 
+    .marti-decorations {
+      bottom: 0;
+      display: none;
+      left: 0;
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 64px;
+      z-index: 0;
+    }
+
+    html[data-theme="marti"] .marti-decorations {
+      display: block;
+    }
+
+    html[data-theme="marti"] main,
+    html[data-theme="marti"] .site-footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-flower {
+      animation: flower-sway var(--sway-speed, 3.6s) ease-in-out infinite alternate;
+      animation-delay: var(--sway-delay, 0s);
+      display: none;
+      filter: saturate(0.88);
+      font-size: 23px;
+      opacity: 1;
+      position: absolute;
+      right: var(--flower-right, 2px);
+      top: 28px;
+      transform-origin: 50% 100%;
+      user-select: none;
+    }
+
+    html[data-theme="marti"] .section-flower {
+      display: block;
+    }
+
+    .section-flower::before,
+    .section-flower::after {
+      animation: fairy-twinkle 2.3s ease-in-out infinite;
+      color: #dfb92f;
+      content: "✦";
+      font-size: 10px;
+      position: absolute;
+    }
+
+    .section-flower::before {
+      left: -9px;
+      top: -8px;
+    }
+
+    .section-flower::after {
+      animation-delay: -1.15s;
+      bottom: -4px;
+      color: #8b74a7;
+      content: "✧";
+      right: -8px;
+    }
+
+    .flower-tulip {
+      --flower-tilt: 7deg;
+      --sway-delay: -2.4s;
+      --sway-speed: 4.2s;
+      --flower-right: 5%;
+    }
+
+    .flower-daisy {
+      --flower-tilt: 5deg;
+      --sway-delay: -0.6s;
+      --sway-speed: 3.1s;
+      --flower-right: 1%;
+      font-size: 21px;
+    }
+
+    .flower-sunflower {
+      --flower-tilt: -6deg;
+      --sway-delay: -1.8s;
+      --sway-speed: 4.5s;
+      --flower-right: 8%;
+      font-size: 27px;
+    }
+
+    .marti-walker {
+      animation: hedgehog-step 0.65s steps(2, end) infinite;
+      bottom: 18px;
+      font-size: 27px;
+      left: max(18px, calc(50% - 525px));
+      position: absolute;
+    }
+
+    .marti-mushroom {
+      animation: mushroom-bob 3s ease-in-out infinite;
+      bottom: 17px;
+      font-size: 17px;
+      left: max(52px, calc(50% - 490px));
+      position: absolute;
+    }
+
+    .name-friend {
+      animation: goat-bob 2.4s ease-in-out infinite;
+      display: none;
+      font-size: 30px;
+      margin-left: 10px;
+      vertical-align: 0.05em;
+    }
+
+    html[data-theme="marti"] .name-friend {
+      display: inline-block;
+    }
+
+    .name-friend::before {
+      animation: fairy-twinkle 2s ease-in-out infinite;
+      color: #dfb92f;
+      content: "✧";
+      display: inline-block;
+      font-size: 12px;
+      margin-right: 3px;
+      vertical-align: top;
+    }
+
+    @keyframes flower-sway {
+      from { transform: rotate(calc(var(--flower-tilt, 0deg) - 5deg)) translateY(1px); }
+      to { transform: rotate(calc(var(--flower-tilt, 0deg) + 5deg)) translateY(-2px); }
+    }
+
+    @keyframes hedgehog-step {
+      0% { transform: translateY(0) rotate(-2deg); }
+      100% { transform: translateY(-3px) rotate(2deg); }
+    }
+
+    @keyframes goat-bob {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-4px) rotate(-2deg); }
+    }
+
+    @keyframes mushroom-bob {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: translateY(-2px) rotate(3deg); }
+    }
+
+    @keyframes fairy-twinkle {
+      0%, 100% { opacity: 0.5; transform: scale(0.8) rotate(0); }
+      50% { opacity: 1; transform: scale(1.18) rotate(12deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { transition: none; }
+
+      .section-flower,
+      .marti-walker,
+      .marti-mushroom,
+      .name-friend,
+      .section-flower::before,
+      .section-flower::after,
+      .name-friend::before,
+      html[data-theme="marti"] .profile-card::before,
+      html[data-theme="marti"] .profile-card::after {
+        animation: none;
+      }
+    }
+
     @media (max-width: 720px) {
       .container {
         padding: 0 22px;
@@ -313,8 +621,17 @@
       .navigation {
         align-items: flex-start;
         flex-direction: column;
-        gap: 4px;
+        gap: 8px;
         padding: 16px 0 10px;
+      }
+
+      .theme-switcher {
+        max-width: 100%;
+      }
+
+      .theme-button {
+        font-size: 10px;
+        padding: 7px 8px;
       }
 
       .nav-links a {
@@ -348,14 +665,31 @@
         gap: 5px;
         grid-template-columns: 1fr;
       }
+
+      .marti-walker {
+        left: 16px;
+      }
+
+      .section-flower {
+        right: 2px;
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="marti-decorations" aria-hidden="true">
+    <span class="marti-walker">🦔</span>
+    <span class="marti-mushroom">🍄</span>
+  </div>
+
   <header class="site-header">
     <nav class="navigation container" aria-label="Main navigation">
-      <a class="site-name" href="#home">Martina Columbaro</a>
+      <div class="theme-switcher" aria-label="Choose page theme">
+        <button class="theme-button" type="button" data-theme-choice="white">White mode</button>
+        <button class="theme-button" type="button" data-theme-choice="black">Black mode</button>
+        <button class="theme-button" type="button" data-theme-choice="marti">Marti's mode</button>
+      </div>
       <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#research">Research</a>
@@ -369,7 +703,7 @@
   <main id="home" class="container">
     <section class="intro">
       <div class="bio">
-        <h1>Martina Columbaro</h1>
+        <h1>Martina Columbaro<span class="name-friend" aria-hidden="true">🐐</span></h1>
 
         <p>
           I am a PhD student at the
@@ -416,6 +750,7 @@
 
     <section id="research" class="section">
       <h2>Research</h2>
+      <span class="section-flower flower-sunflower" aria-hidden="true">🌿🌻</span>
       <p>
         My research explores how multimodal imitation learning can enable more autonomous and intuitive control of upper-limb prostheses. My main interests include:
       </p>
@@ -430,6 +765,7 @@
 
     <section id="news" class="section">
       <h2>News</h2>
+      <span class="section-flower flower-tulip" aria-hidden="true">🌷✨</span>
       <ul class="news-list">
         <li>
           <span class="date">Nov 2024</span>I started my PhD at the
@@ -448,6 +784,7 @@
 
     <section id="education" class="section">
       <h2>Education</h2>
+      <span class="section-flower flower-daisy" aria-hidden="true">🍄🌼</span>
 
       <div class="education-item">
         <div class="education-year">2024-present</div>
@@ -474,6 +811,7 @@
 
     <section id="publications" class="section">
       <h2>Publications &amp; Preprints</h2>
+      <span class="section-flower flower-sunflower" aria-hidden="true">🌿🌸</span>
 
       <article class="publication">
         <div class="publication-visual">PROSTHETIC<br>MANIPULATION</div>
@@ -509,7 +847,38 @@
   </main>
 
   <footer class="site-footer container">
-    © 2026 Martina Columbaro · Last updated September 2026
+    © 2026 Martina Columbaro · Last updated October 2026
   </footer>
+
+  <script>
+    (() => {
+      const validThemes = ["white", "black", "marti"];
+      const buttons = document.querySelectorAll("[data-theme-choice]");
+
+      const applyTheme = (theme, save = true) => {
+        const selectedTheme = validThemes.includes(theme) ? theme : "white";
+        document.documentElement.dataset.theme = selectedTheme;
+
+        buttons.forEach((button) => {
+          const isActive = button.dataset.themeChoice === selectedTheme;
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+
+        if (save) {
+          try {
+            localStorage.setItem("martina-theme", selectedTheme);
+          } catch (error) {
+            /* The selected theme remains active for the current page. */
+          }
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => applyTheme(button.dataset.themeChoice));
+      });
+
+      applyTheme(document.documentElement.dataset.theme || "white", false);
+    })();
+  </script>
 </body>
 </html>
