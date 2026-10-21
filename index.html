@@ -828,7 +828,12 @@
       <span class="section-flower flower-sunflower" aria-hidden="true">🌿🌸</span>
 
       <article class="publication">
-        <div class="publication-visual">PROSTHETIC<br>MANIPULATION</div>
+        <video class="publication-media" autoplay muted playsinline preload="auto"
+               data-loop-start="0" data-loop-end="17"
+               aria-label="Watch, Learn, Assist: autonomous prosthetic manipulation demonstration">
+          <source src="static/videos/watch-learn-assist.mp4" type="video/mp4">
+          Your browser does not support embedded videos.
+        </video>
         <div>
           <div class="publication-title">Watch, Learn, Assist: Unlocking Autonomous Prosthetic Manipulation via Imitation Learning</div>
           <div class="publication-authors"><strong>Martina Columbaro</strong>, Federico Vasile, Nicolò Boccardo and Lorenzo Natale</div>
@@ -843,7 +848,7 @@
       <article class="publication">
         <video class="publication-media" autoplay muted loop playsinline preload="auto"
                aria-label="Tactile sensing experiment for grasp safety in upper-limb prostheses">
-          <source src="tactile_sensing.mp4" type="video/mp4">
+          <source src="static/videos/tactile_sensing.mp4" type="video/mp4">
           Your browser does not support embedded videos.
         </video>
         <div>
@@ -896,6 +901,26 @@
       });
 
       applyTheme(document.documentElement.dataset.theme || "white", false);
+
+      document.querySelectorAll("video[data-loop-end]").forEach((video) => {
+        const loopStart = Number(video.dataset.loopStart) || 0;
+        const loopEnd = Number(video.dataset.loopEnd);
+
+        const restartClip = () => {
+          if (Number.isFinite(loopEnd) && video.currentTime >= loopEnd) {
+            video.currentTime = loopStart;
+            video.play().catch(() => {
+              /* Autoplay may be disabled by the browser. */
+            });
+          }
+        };
+
+        video.addEventListener("timeupdate", restartClip);
+        video.addEventListener("ended", () => {
+          video.currentTime = loopStart;
+          video.play().catch(() => {});
+        });
+      });
     })();
   </script>
 </body>
