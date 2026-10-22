@@ -196,7 +196,7 @@
     }
 
     h1 {
-      font-size: 39px;
+      font-size: 45px;
       line-height: 1.15;
       margin: 0 0 22px;
     }
@@ -209,7 +209,12 @@
     }
 
     html[data-theme="marti"] h1 {
+      font-size: 50px;
       text-shadow: 0 2px 18px rgba(113, 169, 184, 0.2);
+    }
+
+    html[data-theme="marti"] .section h2 {
+      font-size: 26px;
     }
 
     .bio p {
@@ -361,36 +366,6 @@
       font-size: 12px;
       margin-right: 10px;
       min-width: 70px;
-    }
-
-    .education-item {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: 82px minmax(0, 1fr);
-      margin-bottom: 26px;
-    }
-
-    .education-year {
-      color: var(--muted);
-      font-size: 13px;
-      padding-top: 2px;
-    }
-
-    .education-title {
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.45;
-      margin-bottom: 4px;
-    }
-
-    .education-place,
-    .education-detail {
-      font-size: 13px;
-    }
-
-    .education-place {
-      color: var(--muted);
-      margin-bottom: 8px;
     }
 
     .publication {
@@ -678,11 +653,6 @@
         max-width: 190px;
       }
 
-      .education-item {
-        gap: 5px;
-        grid-template-columns: 1fr;
-      }
-
       .marti-walker {
         left: 16px;
       }
@@ -711,7 +681,6 @@
         <a href="#home">Home</a>
         <a href="#research">Research</a>
         <a href="#news">News</a>
-        <a href="#education">Education</a>
         <a href="#publications">Publications</a>
       </div>
     </nav>
@@ -795,35 +764,8 @@
           <a href="https://doi.org/10.1007/978-3-031-77588-8_65" target="_blank" rel="noopener noreferrer"><em>Ensuring Grasp Safety in Upper-Limb Prostheses: A Predictive Risk Approach</em></a>
               was accepted at the 6th International Conference on Neurorehabilitation (ICNR 2024).
         </li>
-        <li><span class="date">Apr 2024</span>Completed a Double Degree MSc in Mechatronic Engineering and Automation and Robotics.</li>
+        <li><span class="date">Apr 2024</span>I received a Double Degree MSc in Mechatronic Engineering from Politecnico di Torino and in Automation and Robotics from Universidad Politécnica de Madrid.</li>
       </ul>
-    </section>
-
-    <section id="education" class="section">
-      <h2>Education</h2>
-      <span class="section-flower flower-daisy" aria-hidden="true">🍄🌼</span>
-
-      <div class="education-item">
-        <div class="education-year">2024-present</div>
-        <div>
-          <div class="education-title">PhD Student</div>
-          <div class="education-place">Italian Institute of Technology · Humanoid Sensing and Perception Group</div>
-          <div class="education-detail">Research on intelligent control strategies for upper-limb prostheses.</div>
-        </div>
-      </div>
-
-      <div class="education-item">
-        <div class="education-year">2021-2024</div>
-        <div>
-          <div class="education-title">Double Degree MSc in Mechatronic Engineering and Automation and Robotics</div>
-          <div class="education-place">Politecnico di Torino, Italy · Universidad Politécnica de Madrid, Spain</div>
-          <div class="education-detail">
-            Master's thesis carried out at the Technical University of Munich (TUM):
-            <a href="https://webthesis.biblio.polito.it/30894/" target="_blank" rel="noopener noreferrer"><em>Ensuring Safety in Upper-Limb Prostheses: Tactile Sensor and Machine Learning for Risk Prediction</em></a>.
-            Supervisors: Prof. Alessandro Rizzo, Prof. Manuel Ferre, Prof. Cristina Piazza and Dr. Patricia Capsi-Morales.
-          </div>
-        </div>
-      </div>
     </section>
 
     <section id="publications" class="section">
@@ -866,6 +808,8 @@
           <div class="publication-venue"><span class="highlight">ICNR 2024</span> · Biosystems &amp; Biorobotics, vol. 31 · Springer, 2025 · pp. 323-326</div>
           <div class="publication-links">
             <a href="https://doi.org/10.1007/978-3-031-77588-8_65" target="_blank" rel="noopener noreferrer">Conference Paper</a>
+            \
+            <a href="https://webthesis.biblio.polito.it/30894/" target="_blank" rel="noopener noreferrer">Master Thesis</a>
           </div>
         </div>
       </article>
